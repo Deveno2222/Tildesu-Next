@@ -13,9 +13,16 @@ export function formatRelativeDate(from: Date) {
     return formatDistanceToNowStrict(from, { addSuffix: true, locale: ru });
   } else {
     if (currentDate.getFullYear() === from.getFullYear()) {
-      return formatDate(from, "MMM d", {locale: ru});
+      return formatDate(from, "MMM d", { locale: ru });
     } else {
-      return formatDate(from, "MMM d, yyy", {locale: ru});
+      return formatDate(from, "MMM d, yyy", { locale: ru });
     }
   }
+}
+
+export function formatNumber(n: number): string {
+  return Intl.NumberFormat("ru", {
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(n);
 }
