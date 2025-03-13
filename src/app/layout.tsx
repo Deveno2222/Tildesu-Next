@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
+import ReactQueryProvider from "./ReactQueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,9 +18,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     template: `%s | tildesu`,
-    default: "tildesu"
+    default: "tildesu",
   },
-  description: "Добро пожаловать на Tildesu — социальную сеть для студентов, преподавателей и сотрудников университета. Общайтесь, делитесь новостями, участвуйте в событиях и находите новых друзей в удобной и современной платформе, разработанной специально для университетской жизни!",
+  description:
+    "Добро пожаловать на Tildesu — социальную сеть для студентов, преподавателей и сотрудников университета. Общайтесь, делитесь новостями, участвуйте в событиях и находите новых друзей в удобной и современной платформе, разработанной специально для университетской жизни!",
 };
 
 export default function RootLayout({
@@ -32,9 +34,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ReactQueryProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </ReactQueryProvider> 
         <Toaster />
       </body>
     </html>
