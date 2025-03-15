@@ -11,6 +11,8 @@ import { useSession } from "@/app/(main)/SessionProvider";
 import { Button } from "@/components/ui/button";
 import "./styles.css";
 import { useToast } from "@/hooks/use-toast";
+import { useSubmitPostMutation } from "./mutations";
+import LoadingButton from "@/components/LoadingButton";
 
 interface Props {
   className?: string;
@@ -19,6 +21,8 @@ interface Props {
 const PostEditor: React.FC<Props> = ({ className }) => {
   const { toast } = useToast();
   const { user } = useSession();
+
+  const mutation = useSubmitPostMutation();
 
   const editor = useEditor({
     extensions: [
@@ -38,12 +42,12 @@ const PostEditor: React.FC<Props> = ({ className }) => {
       blockSeparator: "\n",
     }) || "";
 
-  async function onSubmit() {
-    await submitPost(input);
-    toast({
-      title: "Пост создан",
-    })
-    editor?.commands.clearContent();
+  function onSubmit() {
+    mutation.mutate(input, {
+      onSuccess: () => {
+        editor?.commands.clearContent();
+      },
+    });
   }
 
   return (
@@ -61,13 +65,14 @@ const PostEditor: React.FC<Props> = ({ className }) => {
         />
       </div>
       <div className="flex justify-end">
-        <Button
+        <LoadingButton
           onClick={onSubmit}
+          loading={mutation.isPending}
           disabled={!input.trim()}
           className="min-w-20"
         >
           Создать
-        </Button>
+        </LoadingButton>
       </div>
     </div>
   );
