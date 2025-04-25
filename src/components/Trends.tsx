@@ -1,6 +1,5 @@
 import { validateRequest } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { userDataSelect } from "@/lib/types";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import React, { Suspense } from "react";
@@ -8,6 +7,8 @@ import UserAvatar from "./UserAvatar";
 import { Button } from "./ui/button";
 import { unstable_cache } from "next/cache";
 import { formatNumber } from "@/lib/utils";
+import FollowButton from "./FollowButton";
+import { getUserDataSelect } from "@/lib/types";
 
 const Trends = () => {
   return (
@@ -30,8 +31,13 @@ async function PossibleFriends() {
       NOT: {
         id: user?.id,
       },
+      followers: {
+        none: {
+          followerId: user.id,
+        },
+      },
     },
-    select: userDataSelect,
+    select: getUserDataSelect(user.id),
     take: 5,
   });
 
@@ -54,7 +60,15 @@ async function PossibleFriends() {
               </p>
             </div>
           </Link>
-          <Button>Подписаться</Button>
+          <FollowButton
+            userId={user.id}
+            initialState={{
+              followers: user._count.followers,
+              isFollowerByUser: user.followers.some(
+                ({ followerId }) => followerId === user.id,
+              ),
+            }}
+          />
         </div>
       ))}
     </div>
@@ -98,7 +112,7 @@ async function TrendingTopics() {
               {hashtag}
             </p>
             <p className="text-sm text-muted-foreground">
-              {formatNumber(count)} {count === 1 ? 'пост' : 'постов'}
+              {formatNumber(count)} {count === 1 ? "пост" : "постов"}
             </p>
           </Link>
         );
