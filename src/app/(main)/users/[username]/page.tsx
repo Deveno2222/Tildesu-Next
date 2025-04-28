@@ -13,6 +13,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import UserPosts from "./UserPosts";
+import Linkify from "@/components/Linkify";
 
 interface PageProps {
   params: { username: string };
@@ -72,7 +73,7 @@ export default async function Page({ params }: PageProps) {
             Посты {user.displayName}
           </h2>
         </div>
-        <UserPosts userId={user.id}/>
+        <UserPosts userId={user.id} />
       </div>
       <Trends />
     </main>
@@ -129,9 +130,11 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
       {user.bio && (
         <>
           <hr />
-          <div className="overflow-hidden whitespace-pre-line break-words">
-            {user.bio}
-          </div>
+          <Linkify>
+            <div className="overflow-hidden whitespace-pre-line break-words">
+              {user.bio}
+            </div>
+          </Linkify>
         </>
       )}
     </div>
