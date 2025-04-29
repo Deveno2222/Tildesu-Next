@@ -1,7 +1,7 @@
 import PostEditor from "@/components/posts/editor/PostEditor";
-import Post from "@/components/posts/Post";
+
 import Trends from "@/components/Trends";
-import { prisma } from "@/lib/prisma";
+
 import ForYouFeed from "./ForYouFeed";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabsContent } from "@radix-ui/react-tabs";

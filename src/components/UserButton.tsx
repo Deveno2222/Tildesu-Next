@@ -42,7 +42,7 @@ const UserButton = ({ className }: UserButtonProps) => {
       <DropdownMenuContent>
         <DropdownMenuLabel>Пользователь @{user.username}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href={`users/${user.username}`}>
+        <Link href={`/users/${user.username}`}>
           <DropdownMenuItem>
             <UserIcon className="mr-2 size-4" />
             Профиль

@@ -49,7 +49,7 @@ async function PossibleFriends() {
         <div key={user.id} className="flex items-center justify-between gap-3">
           <UserTooltip user={user}>
             <Link
-              href={`users/${user.username}`}
+              href={`/users/${user.username}`}
               className="flex items-center gap-3"
             >
               <UserAvatar avatarUrl={user.avatarUrl} className="flex-none" />
