@@ -1,5 +1,6 @@
 import { useToast } from "@/hooks/use-toast";
 import kyInstance from "@/lib/ky";
+import pluralizeLikes from "@/lib/pluralizeLikes";
 import { LikeInfo } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import {
@@ -68,7 +69,8 @@ export default function LikeButton({ postId, initialState }: LikeButtonProps) {
         )}
       />
       <span className="text-sm font-medium tabular-nums">
-        {data.likes} <span className="hidden sm:inline">лайков</span>
+        {data.likes}{" "}
+        <span className="hidden sm:inline">{pluralizeLikes(data.likes)}</span>
       </span>
     </button>
   );
