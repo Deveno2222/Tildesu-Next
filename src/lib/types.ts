@@ -1,3 +1,4 @@
+import { Bookmark } from "lucide-react";
 import { Prisma } from "@prisma/client";
 
 export function getUserDataSelect(loggedInUserId: string) {
@@ -45,6 +46,15 @@ export function getPostDataInclude(loggedInUserId: string) {
       },
     },
 
+    bookmarks: {
+      where: {
+        userId: loggedInUserId,
+      },
+      select: {
+        userId: true,
+      },
+    },
+
     _count: {
       select: {
         likes: true,
@@ -70,4 +80,8 @@ export interface FollowerInfo {
 export interface LikeInfo {
   likes: number;
   isLikedByUser: boolean;
+}
+
+export interface BookmarkInfo {
+  isBookmarkedByUser: boolean;
 }
