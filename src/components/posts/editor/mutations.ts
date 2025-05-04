@@ -59,14 +59,14 @@ export function useSubmitPostMutation() {
       });
 
       toast({
-        description: "Post created",
+        description: "Пост успешно добавлен",
       });
     },
     onError(error) {
       console.error(error);
       toast({
         variant: "destructive",
-        description: "Failed to post. Please try again.",
+        description: "Ошибка при добавлении поста",
       });
     },
   });
