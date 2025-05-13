@@ -77,14 +77,15 @@ export function useUpdateProfileMutation() {
       router.refresh();
 
       toast({
-        description: "Profile updated",
+        description: "Профиль обновлен",
       });
     },
     onError(error) {
       console.error(error);
       toast({
         variant: "destructive",
-        description: "Failed to update profile. Please try again.",
+        description:
+          "Ошибка при обновлении профиля. Пожалуйста, повторите попытку",
       });
     },
   });
