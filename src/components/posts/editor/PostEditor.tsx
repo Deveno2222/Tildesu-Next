@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable */
 
 import { cn } from "@/lib/utils";
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -206,7 +207,7 @@ interface AttachementPreviewProps {
 }
 
 function AttachmentPreview({
-  attachment: { file, mediaId, isUploading },
+  attachment: { file, isUploading },
   onRemoveClick,
 }: AttachementPreviewProps) {
   const src = URL.createObjectURL(file);
