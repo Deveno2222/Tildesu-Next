@@ -39,7 +39,7 @@ const PostEditor: React.FC<Props> = ({ className }) => {
     onDrop: startUpload,
   });
 
-  const { ...rootProps } = getRootProps();
+  const { onClick, ...rootProps } = getRootProps();
 
   const editor = useEditor({
     extensions: [
@@ -207,7 +207,7 @@ interface AttachementPreviewProps {
 }
 
 function AttachmentPreview({
-  attachment: { file, isUploading },
+  attachment: { file, mediaId, isUploading },
   onRemoveClick,
 }: AttachementPreviewProps) {
   const src = URL.createObjectURL(file);
