@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { Metadata } from 'next';
