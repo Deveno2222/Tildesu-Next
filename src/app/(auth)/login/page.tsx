@@ -12,7 +12,7 @@ interface Props {
     className?: string;
 }
 
-const page: React.FC<Props> = ({ className }) => {
+const Page: React.FC<Props> = ({ className }) => {
     return (
         <main className={cn(className, "flex min-h-screen items-center justify-center p-6 bg-background")}>
             <div className="w-full max-w-md rounded-2xl border bg-card p-8 shadow-2xl transition hover:shadow-3xl">
@@ -35,4 +35,4 @@ const page: React.FC<Props> = ({ className }) => {
     );
 };
 
-export default page;
+export default Page;
