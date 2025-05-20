@@ -7,7 +7,7 @@ export async function GET(
   { params }: { params: { username: string } },
 ) {
   try {
-    const { username } = await params;
+    const { username } = params;
 
     const { user: loggedInUser } = await validateRequest();
 
