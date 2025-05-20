@@ -12,9 +12,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache, Suspense } from "react";
 
-interface PageProps {
+type PageProps = {
   params: { postId: string };
-}
+  searchParams?: Record<string, string | string[]>;
+};
 
 const getPost = cache(async (postId: string, loggedInUserId: string) => {
   const post = await prisma.post.findUnique({
