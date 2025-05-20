@@ -5,19 +5,14 @@ import Link from "next/link";
 import React from "react";
 import SignUpForm from "./SignUpForm";
 
-interface Props {
-  className?: string;
-}
-
 export const metadata: Metadata = {
   title: "Регистрация",
 };
 
-const Page: React.FC<Props> = ({ className }) => {
+const Page = () => {
   return (
     <main
       className={cn(
-        className,
         "flex min-h-screen items-center justify-center bg-background p-6",
       )}
     >
