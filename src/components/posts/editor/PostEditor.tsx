@@ -9,7 +9,6 @@ import UserAvatar from "@/components/UserAvatar";
 import { useSession } from "@/app/(main)/SessionProvider";
 import { Button } from "@/components/ui/button";
 import "./styles.css";
-import { useToast } from "@/hooks/use-toast";
 import { useSubmitPostMutation } from "./mutations";
 import LoadingButton from "@/components/LoadingButton";
 import useMediaUpload, { Attachment } from "./useMediaUpload";
@@ -187,7 +186,7 @@ function AddAttachmentsButton({
         accept="image/*, video/*"
         multiple
         ref={fileInputRef}
-        className="hiden sr-only"
+        className="sr-only hidden"
         onChange={(e) => {
           const files = Array.from(e.target.files || []);
 
