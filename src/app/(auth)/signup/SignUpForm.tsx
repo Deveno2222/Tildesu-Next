@@ -14,7 +14,7 @@ interface Props {
     className?: string;
 }
 
-const SignUpForm: React.FC<Props> = ({ className }) => {
+const SignUpForm: React.FC<Props> = () => {
     const [error, setError] = useState<string>()
 
     const [isPending, startTransition] = useTransition()

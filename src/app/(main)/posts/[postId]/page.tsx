@@ -9,7 +9,6 @@ import { getPostDataInclude, UserData } from "@/lib/types";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { title } from "process";
 import { cache, Suspense } from "react";
 
 interface PageProps {

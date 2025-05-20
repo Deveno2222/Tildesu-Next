@@ -38,7 +38,7 @@ export function useDeletePostMutation() {
           return {
             pageParams: oldData.pageParams,
             pages: oldData.pages.map(
-              (page: { nextCursor: any; posts: any[] }) => ({
+              (page: { nextCursor: string | null; posts: PostData[] }) => ({
                 nextCursor: page.nextCursor,
                 posts: page.posts.filter((p) => p.id !== deletedPost.id),
               }),

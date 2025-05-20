@@ -21,7 +21,7 @@ interface Props {
   post: PostData;
 }
 
-const Post: React.FC<Props> = ({ className, post }: Props) => {
+const Post: React.FC<Props> = ({ post }: Props) => {
   const { user } = useSession();
 
   const [showComments, setShowComments] = React.useState(false);
@@ -91,7 +91,6 @@ const Post: React.FC<Props> = ({ className, post }: Props) => {
         />
       </div>
       {showComments && <Comments post={post} />}
-      
     </article>
   );
 };

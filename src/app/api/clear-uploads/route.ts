@@ -1,6 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { lt } from "date-fns/locale";
-import { create } from "domain";
 import { UTApi } from "uploadthing/server";
 
 export async function GET(req: Request) {
@@ -34,17 +32,19 @@ export async function GET(req: Request) {
     new UTApi().deleteFiles(
       unusedMedia.map(
         (media) =>
-          media.url.split(`/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`)[1],
+          media.url.split(
+            `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
+          )[1],
       ),
     );
 
     await prisma.media.deleteMany({
-        where: {
-            id: {
-                in: unusedMedia.map((media) => media.id),
-            },
-        }
-    })
+      where: {
+        id: {
+          in: unusedMedia.map((media) => media.id),
+        },
+      },
+    });
 
     console.log("Deleted unused media:", unusedMedia.length);
     return Response.json({ message: "Unused media deleted" }, { status: 200 });

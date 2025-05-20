@@ -2,7 +2,7 @@ import { validateRequest } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
 import { cn } from "@/lib/utils";
-import { Bell, Bookmark, Home, Mail } from "lucide-react";
+import { Bookmark, Home } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import NotificationsButton from "./NotificationsButton";

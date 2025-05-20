@@ -2,10 +2,8 @@ import UserAvatar from "@/components/UserAvatar";
 import { NotificationData } from "@/lib/types";
 import { cn, formatRelativeDate } from "@/lib/utils";
 import { NotificationType } from "@prisma/client";
-import { formatRelative } from "date-fns";
 import { Heart, MessageCircle, User2 } from "lucide-react";
 import Link from "next/link";
-import { format } from "path";
 import { JSX } from "react";
 
 interface NotificationProps {

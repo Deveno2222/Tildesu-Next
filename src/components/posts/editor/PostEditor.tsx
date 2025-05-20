@@ -5,7 +5,6 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import React, { ClipboardEvent, useRef } from "react";
-import { submitPost } from "./actions";
 import UserAvatar from "@/components/UserAvatar";
 import { useSession } from "@/app/(main)/SessionProvider";
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,6 @@ interface Props {
 }
 
 const PostEditor: React.FC<Props> = ({ className }) => {
-  const { toast } = useToast();
   const { user } = useSession();
 
   const mutation = useSubmitPostMutation();
@@ -41,7 +39,7 @@ const PostEditor: React.FC<Props> = ({ className }) => {
     onDrop: startUpload,
   });
 
-  const { onClick, ...rootProps } = getRootProps();
+  const { ...rootProps } = getRootProps();
 
   const editor = useEditor({
     extensions: [
@@ -209,7 +207,7 @@ interface AttachementPreviewProps {
 }
 
 function AttachmentPreview({
-  attachment: { file, mediaId, isUploading },
+  attachment: { file, isUploading },
   onRemoveClick,
 }: AttachementPreviewProps) {
   const src = URL.createObjectURL(file);

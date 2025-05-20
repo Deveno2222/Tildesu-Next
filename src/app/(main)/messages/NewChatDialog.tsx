@@ -14,7 +14,6 @@ import { UserResponse } from "stream-chat";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Check, Loader2, SearchIcon, X } from "lucide-react";
 import UserAvatar from "@/components/UserAvatar";
-import { channel } from "diagnostics_channel";
 import LoadingButton from "@/components/LoadingButton";
 
 interface NewChatDialogProps {
@@ -39,7 +38,7 @@ export default function NewChatDialog({
     UserResponse<DefaultStreamChatGenerics>[]
   >([]);
 
-  const { data, isFetching, isError, isSuccess, status } = useQuery({
+  const { data, isFetching, isError, isSuccess } = useQuery({
     queryKey: ["stream-users", searchInputDebounced],
     queryFn: async () =>
       client.queryUsers(
