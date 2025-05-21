@@ -64,9 +64,8 @@ const PostEditor: React.FC<Props> = ({ className }) => {
       {
         content: input,
         mediaIds: attachments
-          .filter(Boolean)
-          .map((a) => a.mediaId)
-          .filter(Boolean) as string[],
+          .filter((a) => a?.mediaId) // Фильтруем только объекты с mediaId
+          .map((a) => a.mediaId) as string[],
       },
       {
         onSuccess: () => {
@@ -213,6 +212,7 @@ function AttachmentPreview({
   attachment: { file, mediaId, isUploading },
   onRemoveClick,
 }: AttachementPreviewProps) {
+  if (!file) return null; 
   const src = URL.createObjectURL(file);
 
   return (
