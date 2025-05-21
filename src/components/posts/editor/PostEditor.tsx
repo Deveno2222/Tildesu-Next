@@ -63,7 +63,10 @@ const PostEditor: React.FC<Props> = ({ className }) => {
     mutation.mutate(
       {
         content: input,
-        mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[],
+        mediaIds: attachments
+          .filter(Boolean)
+          .map((a) => a.mediaId)
+          .filter(Boolean) as string[],
       },
       {
         onSuccess: () => {
