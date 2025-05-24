@@ -12,11 +12,12 @@ export default function useMediaUpload() {
   const { toast } = useToast();
 
   const [attachments, setAttachments] = useState<Attachment[]>([]);
-
   const [uploadProgress, setUploadProgress] = useState<number>();
 
   const { startUpload, isUploading } = useUploadThing("attachment", {
     onBeforeUploadBegin(files) {
+      console.log("Начинаем загрузку файлов:", files);
+
       const renamedFiles = files.map((file) => {
         const extension = file.name.split(".").pop();
 
@@ -34,16 +35,29 @@ export default function useMediaUpload() {
         ...renamedFiles.map((file) => ({ file, isUploading: true })),
       ]);
 
+      console.log("Переименованные файлы для загрузки:", renamedFiles);
+
       return renamedFiles;
     },
 
-    onUploadProgress: setUploadProgress,
+    onUploadProgress(progress) {
+      console.log(`Прогресс загрузки: ${progress}%`);
+      setUploadProgress(progress);
+    },
+
     onClientUploadComplete(res) {
+      console.log("Загрузка завершена. Результат сервера:", res);
+
       setAttachments((prev) =>
         prev.map((a) => {
           const uploadResult = res.find((r) => r.name === a.file.name);
 
-          if (!uploadResult) return a;
+          if (!uploadResult) {
+            console.warn(`Не найден результат загрузки для файла ${a.file.name}`);
+            return a;
+          }
+
+          console.log(`Файл ${a.file.name} загружен с mediaId:`, uploadResult.serverData.mediaId);
 
           return {
             ...a,
@@ -53,7 +67,9 @@ export default function useMediaUpload() {
         }),
       );
     },
+
     onUploadError(e) {
+      console.error("Ошибка загрузки:", e);
       setAttachments((prev) => prev.filter((a) => !a.isUploading));
       toast({
         variant: "destructive",
@@ -63,6 +79,8 @@ export default function useMediaUpload() {
   });
 
   function handleStartUpload(files: File[]) {
+    console.log("Запуск загрузки файлов:", files);
+
     if (isUploading) {
       toast({
         variant: "destructive",
@@ -85,10 +103,12 @@ export default function useMediaUpload() {
   }
 
   function removeAttachment(fileName: string) {
+    console.log("Удаляем файл из вложений:", fileName);
     setAttachments((prev) => prev.filter((a) => a.file.name !== fileName));
   }
 
   function reset() {
+    console.log("Сбрасываем загрузки и вложения");
     setAttachments([]);
     setUploadProgress(undefined);
   }
