@@ -9,22 +9,27 @@ export async function submitPost(input: {
   content: string;
   mediaIds: string[];
 }) {
-  const { user } = await validateRequest();
+  try {
+    const { user } = await validateRequest();
 
-  if (!user) throw new Error("Unauthorized");
+    if (!user) throw new Error("Unauthorized");
 
-  const { content, mediaIds } = createPostSchema.parse(input);
+    const { content, mediaIds } = createPostSchema.parse(input);
 
-  const newPost = await prisma.post.create({
-    data: {
-      content,
-      userId: user.id,
-      attachments: {
-        connect: mediaIds.map((id) => ({ id })),
+    const newPost = await prisma.post.create({
+      data: {
+        content,
+        userId: user.id,
+        attachments: {
+          connect: mediaIds.map((id) => ({ id })),
+        },
       },
-    },
-    include: getPostDataInclude(user.id),
-  });
+      include: getPostDataInclude(user.id),
+    });
 
-  return newPost;
+    return newPost;
+  } catch (error) {
+    console.error("Post creation error:", error);
+    throw new Error("Failed to create post");
+  }
 }
